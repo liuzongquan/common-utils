@@ -1,5 +1,6 @@
 package date;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -290,7 +291,16 @@ public class LunarCalendar {
         }
         public static void main(String[] args) {
 			LunarCalendar lunar = new LunarCalendar();
-			int[] ymd = lunar.lunarToSolar(2017, 1, 1, false);
+			int[] ymd = lunar.lunarToSolar(2016, 1, 1, false);
+			String dateStr = ymd[0]+"-"+ymd[1]+"-"+ymd[2];
+			Calendar c = Calendar.getInstance();
+			c.set(ymd[0], ymd[1], ymd[2]);
+			c.add(Calendar.DATE, -1);
+			System.out.println(c.getTime());
+			System.out.println(c.get(Calendar.YEAR));
+			System.out.println(c.get(Calendar.MONTH));
+			System.out.println(c.get(Calendar.DAY_OF_MONTH));
+			ymd = lunar.solarToLunar(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
 			System.out.println(ymd[0]+"-"+ymd[1]+"-"+ymd[2]);
 		}
 }
